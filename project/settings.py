@@ -135,8 +135,6 @@ REST_FRAMEWORK = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-CORS_ALLOWED_ORIGINS = [ 'https://bloom-craft-frontend.vercel.app/' ]
-
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_HEADERS= [
