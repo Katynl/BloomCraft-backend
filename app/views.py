@@ -4,34 +4,32 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
 from .models import Product, Category, Order, Feedback
-from .serializers import (
-    ProductListSerializer, ProductDetailSerializer, CategorySerializer,
-    OrderCreateSerializer, OrderListSerializer, OrderDetailSerializer,
-    RegisterSerializer, ProfileSerializer, FeedbackSerializer
-)
+from .serializers import *
+from rest_framework.parsers import MultiPartParser, FormParser
+import cloudinary.uploader
 
 
 # 1. Список товаров (с фильтрами)
-class ProductListView(generics.ListAPIView):
-    serializer_class = ProductListSerializer
+class ProductListView(generics.ListCreateAPIView):   # было ListAPIView
+    queryset = Product.objects.filter(in_stock=True)  # если хочешь, чтобы созданные сразу были видны
     permission_classes = [AllowAny]
+    parser_classes = (MultiPartParser, FormParser)
 
-    def get_queryset(self):
-        queryset = Product.objects.filter(in_stock=True)
-        # Фильтр по категории (slug)
-        category_slug = self.request.query_params.get('category')
-        if category_slug:
-            queryset = queryset.filter(category__slug=category_slug)
-        # Фильтр по популярности
-        is_popular = self.request.query_params.get('is_popular')
-        if is_popular == 'true':
-            queryset = queryset.filter(is_popular=True)
-        # Фильтр по новинкам
-        is_new = self.request.query_params.get('is_new')
-        if is_new == 'true':
-            queryset = queryset.filter(is_new=True)
-        return queryset
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ProductCreateUpdateSerializer
+        return ProductListSerializer
 
+    def perform_create(self, serializer):
+        image_file = self.request.FILES.get('image')
+        image_url = None
+        if image_file:
+            upload_result = cloudinary.uploader.upload(
+                image_file,
+                folder="my_diplom_products"
+            )
+            image_url = upload_result.get('secure_url')
+        serializer.save(image_url=image_url)
 
 # 2. Детальная страница товара
 class ProductDetailView(generics.RetrieveAPIView):

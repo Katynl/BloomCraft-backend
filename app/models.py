@@ -18,7 +18,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     specifications = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_url = models.URLField(max_length=500, blank=True, null=True)
     in_stock = models.BooleanField(default=True)
     is_new = models.BooleanField(default=False, verbose_name="Новинка")
     is_gifts = models.BooleanField(default=False, verbose_name="Подарки")

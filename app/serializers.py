@@ -17,8 +17,28 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'slug', 'price', 'image', 'in_stock', 'category', 'is_new', 'is_popular', 'is_gifts']
+        fields = ['id', 'name', 'slug', 'price', 'image_url', 'in_stock', 'category', 'is_new', 'is_popular', 'is_gifts']
+        # image стало image_url
 
+class ProductCreateUpdateSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(write_only=True, required=False)
+
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'slug', 'price', 'image', 'in_stock', 'category',
+                  'is_new', 'is_popular', 'is_gifts', 'description', 'specifications']
+        # image остаётся только для приёма файла, в базу не льётся
+
+    def update(self, instance, validated_data):
+        image_file = validated_data.pop('image', None)
+        if image_file:
+            # загрузка в Cloudinary
+            upload_result = cloudinary.uploader.upload(
+                image_file,
+                folder="my_diplom_products"
+            )
+            instance.image_url = upload_result.get('secure_url')
+        return super().update(instance, validated_data)
 
 # Сериализатор товара (детальный, с описанием)
 class ProductDetailSerializer(ProductListSerializer):
