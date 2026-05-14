@@ -10,10 +10,10 @@ import cloudinary.uploader
 
 
 # 1. Список товаров (с фильтрами)
-class ProductListView(generics.ListCreateAPIView):   # было ListAPIView
-    queryset = Product.objects.filter(in_stock=True)  # если хочешь, чтобы созданные сразу были видны
+class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.filter(in_stock=True)
+    serializer_class = ProductListSerializer
     permission_classes = [AllowAny]
-    parser_classes = (MultiPartParser, FormParser)
 
     def get_serializer_class(self):
         if self.request.method == 'POST':

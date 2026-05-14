@@ -30,9 +30,13 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["https://bloomcraft-backend-plrc.onrender.com"]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://bloom-craft-frontend-rj8k.vercel.app/",
+]
 # Application definition
 
 INSTALLED_APPS = [
