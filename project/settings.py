@@ -33,7 +33,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ["https://bloomcraft-backend-plrc.onrender.com"]
-
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "https://bloom-craft-frontend-rj8k.vercel.app",
 ]
@@ -137,7 +137,7 @@ REST_FRAMEWORK = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-CORS_ALLOW_ALL_ORIGINS = True
+
 
 CORS_ALLOWED_HEADERS= [
     'accept',
