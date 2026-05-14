@@ -35,7 +35,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["https://bloomcraft-backend-plrc.onrender.com"]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://bloom-craft-frontend-rj8k.vercel.app/",
+    "https://bloom-craft-frontend-rj8k.vercel.app",
 ]
 # Application definition
 
