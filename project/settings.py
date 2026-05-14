@@ -144,7 +144,7 @@ CORS_ALLOWED_HEADERS= [
     'content-type',
     'origin',
     'authorization',
-    'x-crsftoken',
+    'x-csrftoken',
 ]
 
 
