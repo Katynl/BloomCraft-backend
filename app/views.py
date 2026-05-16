@@ -11,26 +11,18 @@ import cloudinary.uploader
 
 # 1. Список товаров (с фильтрами)
 class ProductListView(generics.ListAPIView):
-    queryset = Product.objects.filter(in_stock=True)
     serializer_class = ProductListSerializer
     permission_classes = [AllowAny]
 
-    def get_serializer_class(self):
-        if self.request.method == 'POST':
-            return ProductCreateUpdateSerializer
-        return ProductListSerializer
+    def get_queryset(self):
+        queryset = Product.objects.filter(in_stock=True)
 
-    def perform_create(self, serializer):
-        image_file = self.request.FILES.get('image')
-        image_url = None
-        if image_file:
-            upload_result = cloudinary.uploader.upload(
-                image_file,
-                folder="my_diplom_products"
-            )
-            image_url = upload_result.get('secure_url')
-        serializer.save(image_url=image_url)
+        category = self.request.query_params.get('category')
+        if category:
+            queryset = queryset.filter(category__slug=category)
 
+        return queryset
+    
 # 2. Детальная страница товара
 class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
@@ -49,7 +41,7 @@ class CategoryListView(generics.ListAPIView):
 # 4. Создание заказа
 class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderCreateSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save()

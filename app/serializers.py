@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+import cloudinary.uploader
 from .models import Category, Product, Order, OrderItem, Feedback
 
 User = get_user_model()  # твоя кастомная модель пользователя
@@ -59,35 +60,53 @@ class OrderItemSerializer(serializers.ModelSerializer):
 class OrderCreateSerializer(serializers.ModelSerializer):
     items = serializers.ListField(
         child=serializers.DictField(),
-        write_only=True  # важно: только для записи, не для вывода
+        write_only=True
     )
 
     class Meta:
         model = Order
         fields = [
             'name', 'phone', 'email', 'comment', 'payment_method',
-            'pickup_location', 'total', 'items'
+            'pickup_location', 'items'
         ]
 
     def create(self, validated_data):
         items_data = validated_data.pop('items')
         request = self.context.get('request')
-        user = request.user if request and request.user.is_authenticated else None
-        order = Order.objects.create(user=user, **validated_data)
+        user = request.user
+
+        total = 0
+
+        order = Order.objects.create(
+            user=user,
+            total=0,
+            **validated_data
+        )
 
         for item in items_data:
             product = Product.objects.get(id=item['product_id'])
+            quantity = int(item['quantity'])
+
+            total += product.price * quantity
+
             OrderItem.objects.create(
                 order=order,
                 product=product,
-                quantity=item['quantity'],
+                quantity=quantity,
                 price=product.price
             )
+
+        order.total = total
+        order.save(update_fields=['total'])
+
         return order
 
     def to_representation(self, instance):
-        # Возвращаем только id заказа, чтобы избежать сложных объектов
-        return {'id': instance.id}
+        return {
+            'id': instance.id,
+            'status': instance.status,
+            'total': instance.total,
+        }
 
 
 # Сериализатор для чтения заказа (список заказов пользователя)
@@ -146,4 +165,5 @@ class ProfileSerializer(serializers.ModelSerializer):
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
-        fields = ['name', 'email', 'message']
+        fields = ['id', 'name', 'email', 'message', 'created_at']
+        read_only_fields = ['id', 'created_at']

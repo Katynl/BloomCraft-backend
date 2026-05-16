@@ -69,20 +69,21 @@ class OrderItem(models.Model):
 
 class Feedback(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя')
-    email = models.EmailField(unique=True, verbose_name='Email')
-    message = models.CharField(max_length=255, verbose_name='Сообщение')
+    email = models.EmailField(verbose_name='Email')
+    message = models.TextField(verbose_name='Сообщение')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата отправки')
 
     def __str__(self):
         return f'Сообщение от {self.name} ({self.email})'
-    
+
     class Meta:
         verbose_name = 'Обратная связь'
         verbose_name_plural = 'Обратная связь'
+        ordering = ['-created_at']
 
 class User(AbstractUser):
     image = models.ImageField(upload_to='users/', blank=True, null=True)
-    phone = models.CharField(max_length=10, blank=True)
+    phone = models.CharField(max_length=20, blank=True)
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='app_user_set',      # уникальное имя, чтобы не пересекалось
