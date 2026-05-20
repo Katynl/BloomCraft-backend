@@ -35,7 +35,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["bloomcraft-backend-plrc.onrender.com", "localhost", "127.0.0.1",]
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "https://bloom-craft-frontend-rj8k.vercel.app",
+    "https://bee-craft.vercel.app",
 ]
 # Application definition
 
