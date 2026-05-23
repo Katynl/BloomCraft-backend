@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 import cloudinary.uploader
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Category, Product, Order, OrderItem, Feedback
 
 User = get_user_model()  # твоя кастомная модель пользователя
@@ -201,26 +202,31 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data["password"],
             phone=validated_data.get("phone", ""),
         )
-    
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    username_field = "email"
+
+class CustomTokenObtainPairSerializer(serializers.Serializer):
+    email = serializers.EmailField(
+        required=True,
+        error_messages={
+            "required": "Введите email.",
+            "blank": "Введите email.",
+            "invalid": "Введите корректный email.",
+        },
+    )
+    password = serializers.CharField(
+        required=True,
+        write_only=True,
+        error_messages={
+            "required": "Введите пароль.",
+            "blank": "Введите пароль.",
+        },
+    )
 
     def validate(self, attrs):
-        email = attrs.get("email", "").strip().lower()
+        email = attrs.get("email", "").strip()
         password = attrs.get("password", "")
 
-        if not email:
-            raise serializers.ValidationError({
-                "email": "Введите email."
-            })
-
-        if not password:
-            raise serializers.ValidationError({
-                "password": "Введите пароль."
-            })
-
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(email__iexact=email)
         except User.DoesNotExist:
             raise serializers.ValidationError({
                 "email": "Пользователь с таким email не найден."
@@ -236,12 +242,12 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
                 "detail": "Аккаунт отключён."
             })
 
-        attrs["username"] = user.username
+        refresh = RefreshToken.for_user(user)
 
-        return super().validate({
-            "username": user.username,
-            "password": password,
-        })
+        return {
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
+        }
 
 # Сериализатор для профиля пользователя (чтение и обновление)
 class ProfileSerializer(serializers.ModelSerializer):
