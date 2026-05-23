@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 import cloudinary.uploader
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Category, Product, Order, OrderItem, Feedback
 
 User = get_user_model()  # твоя кастомная модель пользователя
@@ -133,9 +134,37 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 # serializers.py
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, min_length=6)
-    password2 = serializers.CharField(write_only=True)
-    email = serializers.EmailField(required=True)
+    username = serializers.CharField(
+        required=True,
+        error_messages={
+            "required": "Введите имя пользователя.",
+            "blank": "Введите имя пользователя.",
+        },
+    )
+    email = serializers.EmailField(
+        required=True,
+        error_messages={
+            "required": "Введите email.",
+            "blank": "Введите email.",
+            "invalid": "Введите корректный email.",
+        },
+    )
+    password = serializers.CharField(
+        write_only=True,
+        min_length=6,
+        error_messages={
+            "required": "Введите пароль.",
+            "blank": "Введите пароль.",
+            "min_length": "Пароль должен содержать минимум 6 символов.",
+        },
+    )
+    password2 = serializers.CharField(
+        write_only=True,
+        error_messages={
+            "required": "Повторите пароль.",
+            "blank": "Повторите пароль.",
+        },
+    )
     phone = serializers.CharField(required=False, allow_blank=True)
 
     class Meta:
@@ -144,12 +173,16 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def validate_username(self, value):
         if User.objects.filter(username=value).exists():
-            raise serializers.ValidationError("Пользователь с таким именем уже существует.")
+            raise serializers.ValidationError(
+                "Пользователь с таким именем уже существует."
+            )
         return value
 
     def validate_email(self, value):
         if User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("Пользователь с таким email уже существует.")
+            raise serializers.ValidationError(
+                "Пользователь с таким email уже существует."
+            )
         return value
 
     def validate(self, data):
@@ -168,7 +201,40 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data["password"],
             phone=validated_data.get("phone", ""),
         )
+    
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        username = attrs.get("username", "").strip()
+        password = attrs.get("password", "")
 
+        if not username:
+            raise serializers.ValidationError({
+                "username": "Введите имя пользователя."
+            })
+
+        if not password:
+            raise serializers.ValidationError({
+                "password": "Введите пароль."
+            })
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise serializers.ValidationError({
+                "username": "Такого пользователя не существует."
+            })
+
+        if not user.check_password(password):
+            raise serializers.ValidationError({
+                "password": "Неправильный логин или пароль."
+            })
+
+        if not user.is_active:
+            raise serializers.ValidationError({
+                "detail": "Аккаунт отключён."
+            })
+
+        return super().validate(attrs)
 
 # Сериализатор для профиля пользователя (чтение и обновление)
 class ProfileSerializer(serializers.ModelSerializer):

@@ -7,6 +7,7 @@ from .models import Product, Category, Order, Feedback
 from .serializers import *
 from rest_framework.parsers import MultiPartParser, FormParser
 import cloudinary.uploader
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 # 1. Список товаров (с фильтрами)
@@ -87,3 +88,6 @@ class FeedbackCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save()
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
