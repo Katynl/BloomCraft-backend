@@ -91,3 +91,17 @@ class FeedbackCreateView(generics.CreateAPIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+class SimplePasswordResetView(generics.GenericAPIView):
+    serializer_class = SimplePasswordResetSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(
+            {"detail": "Пароль успешно изменён. Теперь можно войти с новым паролем."},
+            status=status.HTTP_200_OK,
+        )

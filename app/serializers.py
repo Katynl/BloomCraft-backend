@@ -4,6 +4,7 @@ import cloudinary.uploader
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Category, Product, Order, OrderItem, Feedback
+from django.contrib.auth.password_validation import validate_password
 
 User = get_user_model()  # твоя кастомная модель пользователя
 
@@ -262,3 +263,62 @@ class FeedbackSerializer(serializers.ModelSerializer):
         model = Feedback
         fields = ['id', 'name', 'email', 'message', 'created_at']
         read_only_fields = ['id', 'created_at']
+
+class SimplePasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField(
+        required=True,
+        error_messages={
+            "required": "Введите email.",
+            "blank": "Введите email.",
+            "invalid": "Введите корректный email.",
+        },
+    )
+
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        min_length=6,
+        error_messages={
+            "required": "Введите новый пароль.",
+            "blank": "Введите новый пароль.",
+            "min_length": "Пароль должен содержать минимум 6 символов.",
+        },
+    )
+
+    password2 = serializers.CharField(
+        write_only=True,
+        required=True,
+        error_messages={
+            "required": "Повторите пароль.",
+            "blank": "Повторите пароль.",
+        },
+    )
+
+    def validate_email(self, value):
+        email = value.strip()
+
+        try:
+            user = User.objects.get(email__iexact=email)
+        except User.DoesNotExist:
+            raise serializers.ValidationError(
+                "Пользователь с таким email не найден."
+            )
+
+        self.user = user
+        return email
+
+    def validate(self, data):
+        if data["password"] != data["password2"]:
+            raise serializers.ValidationError({
+                "password2": "Пароли не совпадают."
+            })
+
+        validate_password(data["password"], user=self.user)
+
+        return data
+
+    def save(self):
+        user = self.user
+        user.set_password(self.validated_data["password"])
+        user.save(update_fields=["password"])
+        return user

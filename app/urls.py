@@ -15,6 +15,12 @@ urlpatterns = [
     path('token/', views.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
+    path(
+    'password-reset-simple/',
+    views.SimplePasswordResetView.as_view(),
+    name='password-reset-simple'
+),
 
     path('feedback/', views.FeedbackCreateView.as_view(), name='feedback'),
+    
 ]
