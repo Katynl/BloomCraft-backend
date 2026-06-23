@@ -11,6 +11,48 @@ urlpatterns = [
     path('orders/my/', views.UserOrderListView.as_view(), name='user-orders'),
     path('orders/my/<int:pk>/', views.UserOrderDetailView.as_view(), name='user-order-detail'),
 
+    path(
+    "admin/orders/",
+    views.AdminOrderListView.as_view(),
+    name="admin-orders",
+),
+
+path(
+    "admin/orders/<int:pk>/",
+    views.AdminOrderUpdateView.as_view(),
+    name="admin-order-update",
+),
+
+path(
+    "admin/products/",
+    views.AdminProductListView.as_view(),
+    name="admin-products",
+),
+
+path(
+    "admin/products/create/",
+    views.AdminProductCreateView.as_view(),
+    name="admin-product-create",
+),
+
+path(
+    "admin/products/<int:pk>/",
+    views.AdminProductUpdateView.as_view(),
+    name="admin-product-update",
+),
+
+path(
+    "admin/products/<int:pk>/delete/",
+    views.AdminProductDeleteView.as_view(),
+    name="admin-product-delete",
+),
+
+path(
+    "admin/feedback/",
+    views.AdminFeedbackListView.as_view(),
+    name="admin-feedback",
+),
+
     path('register/', views.RegisterView.as_view(), name='register'),
     path('token/', views.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

@@ -1,0 +1,698 @@
+[
+{
+  "model": "app.category",
+  "pk": 4,
+  "fields": {
+    "name": "Ленты",
+    "slug": "lenty",
+    "description": "",
+    "image": ""
+  }
+},
+{
+  "model": "app.category",
+  "pk": 5,
+  "fields": {
+    "name": "Корзинки",
+    "slug": "korzynki",
+    "description": "",
+    "image": ""
+  }
+},
+{
+  "model": "app.category",
+  "pk": 6,
+  "fields": {
+    "name": "Цветы",
+    "slug": "flowers",
+    "description": "",
+    "image": "catalog/flowers.png"
+  }
+},
+{
+  "model": "app.category",
+  "pk": 7,
+  "fields": {
+    "name": "Букеты",
+    "slug": "buketi",
+    "description": "",
+    "image": ""
+  }
+},
+{
+  "model": "app.category",
+  "pk": 8,
+  "fields": {
+    "name": "Сладости",
+    "slug": "sweets",
+    "description": "",
+    "image": "catalog/Mochi_WJQHaFX.png"
+  }
+},
+{
+  "model": "app.product",
+  "pk": 3,
+  "fields": {
+    "category": 6,
+    "name": "Ромашки",
+    "slug": "romaskas",
+    "description": "",
+    "specifications": "",
+    "price": "25.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 4,
+  "fields": {
+    "category": 8,
+    "name": "Моти c клубникой",
+    "slug": "motyStrawberries",
+    "description": "",
+    "specifications": "",
+    "price": "160.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 5,
+  "fields": {
+    "category": 6,
+    "name": "Каллы",
+    "slug": "kallas",
+    "description": "",
+    "specifications": "",
+    "price": "35.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": true,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 6,
+  "fields": {
+    "category": 6,
+    "name": "Фиалки",
+    "slug": "fialkas",
+    "description": "",
+    "specifications": "",
+    "price": "35.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": true,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 7,
+  "fields": {
+    "category": 6,
+    "name": "Пионы",
+    "slug": "pions",
+    "description": "",
+    "specifications": "",
+    "price": "35.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": true,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 8,
+  "fields": {
+    "category": 6,
+    "name": "Гибискус",
+    "slug": "gibiscus",
+    "description": "",
+    "specifications": "",
+    "price": "35.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": true,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 9,
+  "fields": {
+    "category": 6,
+    "name": "Розы",
+    "slug": "rozi",
+    "description": "",
+    "specifications": "",
+    "price": "35.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 10,
+  "fields": {
+    "category": 8,
+    "name": "Моти c манго",
+    "slug": "motyMango",
+    "description": "",
+    "specifications": "",
+    "price": "160.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 12,
+  "fields": {
+    "category": 8,
+    "name": "Моти c черникой",
+    "slug": "motyChernica",
+    "description": "",
+    "specifications": "",
+    "price": "160.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 13,
+  "fields": {
+    "category": 8,
+    "name": "Моти c матчей",
+    "slug": "motyMatcha",
+    "description": "",
+    "specifications": "",
+    "price": "160.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 17,
+  "fields": {
+    "category": 7,
+    "name": "Букет \"Нежно\"",
+    "slug": "buketNeshniePions",
+    "description": "Этот букет — воплощение утренней нежности и акварельной романтики. Пышные садовые пионы с их бархатистыми, многослойными лепестками встречаются с изящными ранункулюсами, создавая воздушное облако цвета. Кремово-белые, бледно-розовые и пыльно-розовые оттенки мягко перетекают друг в друга, а полураскрытые бутоны добавляют ощущение свежести и лёгкой недосказанности. Небрежно рассыпанные вокруг лепестки и натуральная льняная лента, которой подвязаны стебли, подчёркивают естественную красоту этого монохромного чуда. Идеальный выбор, чтобы подарить момент тихого счастья.",
+    "specifications": "Диаметр букета 25–30 см (в расправленном виде, визуально пышный)\r\nДлина стеблей 30–35 см (аккуратно подрезаны для композиции лёжа)",
+    "price": "3250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": true
+  }
+},
+{
+  "model": "app.product",
+  "pk": 18,
+  "fields": {
+    "category": 7,
+    "name": "Букет \"Вальс\"",
+    "slug": "buketProvanskiVeter",
+    "description": "Букет, в котором слышен шелест лавандовых полей и аромат июльского разнотравья. Нежные кисти лаванды переплетаются с небесно-голубыми васильками и белоснежными ромашками, создавая ощущение лёгкой небрежности, как будто цветы только что собрали на рассвете. Несколько сухих колосков лаванды деликатно выглядывают из букета, добавляя графичности и ноту провансальского шика. Простая джутовая нить, которой связаны стебли, подчёркивает естественность и любовь к природной простоте. Идеален для тех, кто ценит свободу и уют.",
+    "specifications": "Диаметр букета 20–25 см (слегка раскидистый, воздушный)\r\nДлина стеблей 30–35 см",
+    "price": "2250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": true
+  }
+},
+{
+  "model": "app.product",
+  "pk": 19,
+  "fields": {
+    "category": 7,
+    "name": "Букет \"Розы\"",
+    "slug": "buketBarhat",
+    "description": "Роскошный и вневременной букет, говорящий на языке глубоких чувств. Темно-красные, почти бордовые садовые розы собраны в плотную, элегантную композицию. Их бархатистые лепестки с каплями утренней росы завораживают своей глубиной и совершенством. Полураскрытые бутоны хранят в себе тайну, а чёрная атласная лента, туго обвивающая стебли, добавляет драматизма и строгой графичности. Несколько лепестков, небрежно лежащих рядом, усиливают ощущение живого прикосновения к прекрасному. Для моментов, когда хочется выразить больше, чем просто слова.",
+    "specifications": "Диаметр букета 25–30 см (плотный, округлый)\r\nДлина стеблей\t~35–40 см (ровно подрезаны)",
+    "price": "3250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": true
+  }
+},
+{
+  "model": "app.product",
+  "pk": 20,
+  "fields": {
+    "category": 7,
+    "name": "Букет \"Вечно\"",
+    "slug": "buketVechno",
+    "description": "Современный букет вне времени — для ценителей эстетики бохо и осознанной красоты. Воздушный и утончённый, он объединяет матовую нежность лагуруса (заячьих хвостиков), фактурные колосья пшеницы, кружевные зонтики бессмертника и серебристо-зелёные веточки эвкалипта. Небольшие коробочки хлопка добавляют мягкий акцент и ощущение тактильности. Букет не выглядит перегруженным — он лёгкий, словно набросок, и подвязан простым льняным шнуром. Идеален для интерьера, тёплых подарков и самых искренних улыбок.",
+    "specifications": "Диаметр букета 20–25 см (воздушный, не слишком плотный)\r\nДлина стеблей 30–35 см",
+    "price": "2400.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": true
+  }
+},
+{
+  "model": "app.product",
+  "pk": 21,
+  "fields": {
+    "category": 8,
+    "name": "Нежность",
+    "slug": "naborNeshnosti",
+    "description": "Изящный подарок для самого тонкого вкуса. В прозрачной коробке собраны три идеально круглых моти, напоминающих облачка с разными характерами. Каждый шарик вручную припудрен тончайшим слоем рисовой муки и выглядит как драгоценность.",
+    "specifications": "Вкусы в наборе: Клубника, Матча, Манго\r\nНачинка: Нежный сливочно-творожный крем, натуральные кусочки фруктов/ягод",
+    "price": "400.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": true,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 22,
+  "fields": {
+    "category": 8,
+    "name": "Микс",
+    "slug": "naborMochiYagodnyMix",
+    "description": "Лёгкие, рисовые облака, припорошенные белой мукой и уложены в изящную прозрачную коробку, перевязанную лентой нежно-персикового оттенка. Дарите радость без слов.",
+    "specifications": "Вкусы в наборе: Клубника, Манго, Черника\r\nНачинка: Белый сливочно-творожный крем, цельные ягоды и кусочки фруктов, лёгкий джем",
+    "price": "400.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": true,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 27,
+  "fields": {
+    "category": 8,
+    "name": "Гармония",
+    "slug": "naborMochiGarmony",
+    "description": "Встреча трёх стихий под прозрачным куполом. Внутри — облако прохладного сливочно-творожного крема. Тонкая рисовая пудра на матовой поверхности и атласный бант фисташкового оттенка завершают образ утончённого десерта, созданного для особых моментов.",
+    "specifications": "Вкусы в наборе: Манго, Черника, Матча\r\nНачинка:\tСливочный творожный крем с добавлением натурального фруктового/ягодного наполнителя",
+    "price": "400.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": true,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 28,
+  "fields": {
+    "category": 8,
+    "name": "Cимфония",
+    "slug": "naborMochiVechernayaSymphony",
+    "description": "Нежная классика, смешанная с дерзостью северных ягод. Прозрачная коробка, перехваченная нежно-лавандовой лентой, делает этот набор готовым подарком к любому празднику или просто тёплому вечеру.",
+    "specifications": "Вкусы в наборе: Клубника, Черника, Матча\r\nНачинка: Пастообразный творожно-сливочный крем со свежими ягодами и капелькой джема",
+    "price": "400.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": true,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 29,
+  "fields": {
+    "category": 6,
+    "name": "Гвоздики",
+    "slug": "gvozdiki",
+    "description": "",
+    "specifications": "",
+    "price": "69.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 30,
+  "fields": {
+    "category": 6,
+    "name": "Гипсофилы",
+    "slug": "gipsophils",
+    "description": "",
+    "specifications": "",
+    "price": "67.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 31,
+  "fields": {
+    "category": 4,
+    "name": "Лента Серая",
+    "slug": "lentaGray",
+    "description": "Нежная тканевая лента в классическую клетку с изящной волнистой окантовкой. Идеально подходит для оформления букетов в деревенском, прованском или скандинавском стиле.",
+    "specifications": "Размер: 2,5 см * 15 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 32,
+  "fields": {
+    "category": 4,
+    "name": "Лента Красная",
+    "slug": "lentaRed",
+    "description": "Нежная тканевая лента в классическую клетку с изящной волнистой окантовкой. Идеально подходит для оформления букетов в деревенском, прованском или скандинавском стиле.",
+    "specifications": "Размер: 2,5 см * 15 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 33,
+  "fields": {
+    "category": 4,
+    "name": "Лента Голубая",
+    "slug": "lentaBlue",
+    "description": "Нежная тканевая лента в классическую клетку с изящной волнистой окантовкой. Идеально подходит для оформления букетов в деревенском, прованском или скандинавском стиле.",
+    "specifications": "Размер: 2,5 см * 15 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 34,
+  "fields": {
+    "category": 4,
+    "name": "Лента Желтая",
+    "slug": "lentaYellow",
+    "description": "Нежная тканевая лента в классическую клетку с изящной волнистой окантовкой. Идеально подходит для оформления букетов в деревенском, прованском или скандинавском стиле.",
+    "specifications": "Размер: 2,5 см * 15 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 35,
+  "fields": {
+    "category": 4,
+    "name": "Лента Зеленая",
+    "slug": "lentaGreen",
+    "description": "Дизайнерская лента — это универсальный и стильный материал, выполненный из различных материалов, что позволяет легко сочетать его с другими букетами. С множеством текстур, узоров и цветов, она добавляет индивидуальность и креативность в любые композиции.",
+    "specifications": "Размер: 2,5 см * 10 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 36,
+  "fields": {
+    "category": 4,
+    "name": "Лента Белая",
+    "slug": "lentaWhite",
+    "description": "Дизайнерская лента — это универсальный и стильный материал, выполненный из различных материалов, что позволяет легко сочетать его с другими букетами. С множеством текстур, узоров и цветов, она добавляет индивидуальность и креативность в любые композиции.",
+    "specifications": "Размер: 2,5 см * 10 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 37,
+  "fields": {
+    "category": 4,
+    "name": "Лента Черная",
+    "slug": "lentaBlack",
+    "description": "Дизайнерская лента — это универсальный и стильный материал, выполненный из различных материалов, что позволяет легко сочетать его с другими букетами. С множеством текстур, узоров и цветов, она добавляет индивидуальность и креативность в любые композиции.",
+    "specifications": "Размер: 2,5 см * 10 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.product",
+  "pk": 38,
+  "fields": {
+    "category": 4,
+    "name": "Лента Лавандовая",
+    "slug": "lentaLavanda",
+    "description": "Дизайнерская лента — это универсальный и стильный материал, выполненный из различных материалов, что позволяет легко сочетать его с другими букетами. С множеством текстур, узоров и цветов, она добавляет индивидуальность и креативность в любые композиции.",
+    "specifications": "Размер: 2,5 см * 10 ярд",
+    "price": "250.00",
+    "image_url": null,
+    "in_stock": true,
+    "is_new": false,
+    "is_gifts": false,
+    "is_popular": false
+  }
+},
+{
+  "model": "app.order",
+  "pk": 3,
+  "fields": {
+    "status": "preparing",
+    "user": 2,
+    "name": "Jastin",
+    "phone": "+79502889838",
+    "email": "Gtuj@gmail.com",
+    "comment": "",
+    "payment_method": "card",
+    "pickup_location": "ул. Пушкина, д. 10",
+    "total": "450.00",
+    "created_at": "2026-05-04T10:31:38.795Z"
+  }
+},
+{
+  "model": "app.order",
+  "pk": 4,
+  "fields": {
+    "status": "new",
+    "user": null,
+    "name": "Jastin",
+    "phone": "+79502889838",
+    "email": "Gtuj@gmail.com",
+    "comment": "ляляляля",
+    "payment_method": "cash",
+    "pickup_location": "ул. Лермонтова, д. 5",
+    "total": "400.00",
+    "created_at": "2026-05-06T00:36:14.439Z"
+  }
+},
+{
+  "model": "app.order",
+  "pk": 5,
+  "fields": {
+    "status": "new",
+    "user": 2,
+    "name": "Jastin",
+    "phone": "+79502889838",
+    "email": "Gtuj@gmail.com",
+    "comment": "ляляляля",
+    "payment_method": "cash",
+    "pickup_location": "ул. Лермонтова, д. 5",
+    "total": "450.00",
+    "created_at": "2026-05-06T00:36:37.569Z"
+  }
+},
+{
+  "model": "app.order",
+  "pk": 6,
+  "fields": {
+    "status": "new",
+    "user": 2,
+    "name": "Jastin",
+    "phone": "+79502889838",
+    "email": "Gtuj@gmail.com",
+    "comment": "ляляляляляля",
+    "payment_method": "card",
+    "pickup_location": "ул. Лермонтова, д. 5",
+    "total": "450.00",
+    "created_at": "2026-05-06T00:37:01.377Z"
+  }
+},
+{
+  "model": "app.order",
+  "pk": 7,
+  "fields": {
+    "status": "new",
+    "user": null,
+    "name": "Лента Черная",
+    "phone": "+79502889838",
+    "email": "Gtuj@gmail.com",
+    "comment": "ляляляля",
+    "payment_method": "card",
+    "pickup_location": "ул. Пушкина, д. 10",
+    "total": "750.00",
+    "created_at": "2026-05-10T14:20:14.099Z"
+  }
+},
+{
+  "model": "app.orderitem",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "product": 22,
+    "quantity": 1,
+    "price": "400.00"
+  }
+},
+{
+  "model": "app.orderitem",
+  "pk": 7,
+  "fields": {
+    "order": 7,
+    "product": 32,
+    "quantity": 1,
+    "price": "250.00"
+  }
+},
+{
+  "model": "app.orderitem",
+  "pk": 8,
+  "fields": {
+    "order": 7,
+    "product": 33,
+    "quantity": 1,
+    "price": "250.00"
+  }
+},
+{
+  "model": "app.orderitem",
+  "pk": 9,
+  "fields": {
+    "order": 7,
+    "product": 34,
+    "quantity": 1,
+    "price": "250.00"
+  }
+},
+{
+  "model": "app.feedback",
+  "pk": 1,
+  "fields": {
+    "name": "Лента Черная",
+    "email": "Gtuj@gmail.com",
+    "message": "вопросики",
+    "created_at": "2026-05-09T13:17:18.458Z"
+  }
+},
+{
+  "model": "app.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$FpQsuCGoYGFHjK6QuW2r68$FqJI0EsumLpPsiAhHg91c2k+yITlHoXe7FTusAlPpWo=",
+    "last_login": "2026-05-05T07:07:56.119Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-04-29T08:48:30.608Z",
+    "image": "",
+    "phone": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "app.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$3Kzylij12ZzUlIocHMfcvl$24E8RDF89uoefF7KljKi6isH8UW8E/jAKzD7hv0i33s=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Jastin",
+    "first_name": "",
+    "last_name": "",
+    "email": "jastin@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-29T10:07:26.204Z",
+    "image": "",
+    "phone": "",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

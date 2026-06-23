@@ -213,6 +213,7 @@ class CustomTokenObtainPairSerializer(serializers.Serializer):
             "invalid": "Введите корректный email.",
         },
     )
+
     password = serializers.CharField(
         required=True,
         write_only=True,
@@ -228,6 +229,7 @@ class CustomTokenObtainPairSerializer(serializers.Serializer):
 
         try:
             user = User.objects.get(email__iexact=email)
+
         except User.DoesNotExist:
             raise serializers.ValidationError({
                 "email": "Пользователь с таким email не найден."
@@ -248,15 +250,37 @@ class CustomTokenObtainPairSerializer(serializers.Serializer):
         return {
             "refresh": str(refresh),
             "access": str(refresh.access_token),
+
+            # 👇 добавляем
+            "user": {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "is_staff": user.is_staff,
+                "is_superuser": user.is_superuser,
+            }
         }
 
 # Сериализатор для профиля пользователя (чтение и обновление)
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'image']
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "phone",
+            "image",
+            "is_staff",
+            "is_superuser",
+        ]
 
-
+        read_only_fields = [
+            "is_staff",
+            "is_superuser",
+        ]
+        
 # Сериализатор для обратной связи
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
@@ -322,3 +346,8 @@ class SimplePasswordResetSerializer(serializers.Serializer):
         user.set_password(self.validated_data["password"])
         user.save(update_fields=["password"])
         return user
+    
+class AdminOrderStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ["status"]

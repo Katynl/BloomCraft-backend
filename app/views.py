@@ -7,6 +7,7 @@ from .models import Product, Category, Order, Feedback
 from .serializers import *
 from rest_framework.parsers import MultiPartParser, FormParser
 import cloudinary.uploader
+from .permissions import IsAdminUserCustom
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
@@ -105,3 +106,44 @@ class SimplePasswordResetView(generics.GenericAPIView):
             {"detail": "Пароль успешно изменён. Теперь можно войти с новым паролем."},
             status=status.HTTP_200_OK,
         )
+    
+class AdminOrderListView(generics.ListAPIView):
+    queryset = Order.objects.all().order_by("-created_at")
+    serializer_class = OrderDetailSerializer
+    permission_classes = [IsAdminUserCustom]
+
+class AdminOrderUpdateView(generics.UpdateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = AdminOrderStatusSerializer
+    permission_classes = [IsAdminUserCustom]
+
+class AdminProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer
+    permission_classes = [IsAdminUserCustom]
+
+class AdminProductCreateView(generics.CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductCreateUpdateSerializer
+    permission_classes = [IsAdminUserCustom]
+
+    parser_classes = [MultiPartParser, FormParser]
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+class AdminProductUpdateView(generics.UpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductCreateUpdateSerializer
+    permission_classes = [IsAdminUserCustom]
+
+    parser_classes = [MultiPartParser, FormParser]
+
+class AdminProductDeleteView(generics.DestroyAPIView):
+    queryset = Product.objects.all()
+    permission_classes = [IsAdminUserCustom]
+
+class AdminFeedbackListView(generics.ListAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    permission_classes = [IsAdminUserCustom]
