@@ -82,6 +82,7 @@ class Feedback(models.Model):
         ordering = ['-created_at']
 
 class User(AbstractUser):
+    email = models.EmailField(unique=True)
     image = models.ImageField(upload_to='users/', blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True)
     groups = models.ManyToManyField(
@@ -98,6 +99,9 @@ class User(AbstractUser):
         verbose_name='user permissions',
         help_text='Specific permissions for this user.'
     )
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
         return self.email
