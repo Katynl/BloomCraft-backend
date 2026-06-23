@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 import cloudinary.uploader
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Category, Product, Order, OrderItem, Feedback
 from django.contrib.auth.password_validation import validate_password
@@ -204,60 +205,34 @@ class RegisterSerializer(serializers.ModelSerializer):
             phone=validated_data.get("phone", ""),
         )
 
-class CustomTokenObtainPairSerializer(serializers.Serializer):
-    email = serializers.EmailField(
-        required=True,
-        error_messages={
-            "required": "Введите email.",
-            "blank": "Введите email.",
-            "invalid": "Введите корректный email.",
-        },
-    )
-
-    password = serializers.CharField(
-        required=True,
-        write_only=True,
-        error_messages={
-            "required": "Введите пароль.",
-            "blank": "Введите пароль.",
-        },
-    )
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = "email"
 
     def validate(self, attrs):
-        email = attrs.get("email", "").strip()
-        password = attrs.get("password", "")
+        email = attrs.get("email")
+        password = attrs.get("password")
 
-        try:
-            user = User.objects.get(email__iexact=email)
+        user = authenticate(username=email, password=password)
 
-        except User.DoesNotExist:
+        if user is None:
             raise serializers.ValidationError({
-                "email": "Пользователь с таким email не найден."
-            })
-
-        if not user.check_password(password):
-            raise serializers.ValidationError({
-                "password": "Неправильный email или пароль."
+                "detail": "Неверный email или пароль"
             })
 
         if not user.is_active:
             raise serializers.ValidationError({
-                "detail": "Аккаунт отключён."
+                "detail": "Аккаунт отключён"
             })
 
-        refresh = RefreshToken.for_user(user)
+        data = super().get_token(user)
 
         return {
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
-
-            # 👇 добавляем
+            "refresh": str(data),
+            "access": str(data.access_token),
             "user": {
                 "id": user.id,
                 "username": user.username,
                 "email": user.email,
-                "is_staff": user.is_staff,
-                "is_superuser": user.is_superuser,
             }
         }
 
