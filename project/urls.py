@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('app.urls')),   # подключаем маршруты из приложения app
+    path('api/', include('app.urls')),   # подключаем маршруты из приложения app
 ]
 
 # Для отображения загруженных картинок во время разработки
