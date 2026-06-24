@@ -19,8 +19,8 @@ urlpatterns = [
 
 path(
     "admin/orders/<int:pk>/",
-    views.AdminOrderUpdateView.as_view(),
-    name="admin-order-update",
+    views.AdminOrderDetailUpdateView.as_view(),
+    name="admin-order-detail-update",
 ),
 
 path(

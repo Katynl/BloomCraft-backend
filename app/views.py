@@ -112,10 +112,14 @@ class AdminOrderListView(generics.ListAPIView):
     serializer_class = OrderDetailSerializer
     permission_classes = [IsAdminUserCustom]
 
-class AdminOrderUpdateView(generics.UpdateAPIView):
+class AdminOrderDetailUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Order.objects.all()
-    serializer_class = AdminOrderStatusSerializer
     permission_classes = [IsAdminUserCustom]
+
+    def get_serializer_class(self):
+        if self.request.method in ["PUT", "PATCH"]:
+            return AdminOrderStatusSerializer
+        return OrderDetailSerializer
 
 class AdminProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
