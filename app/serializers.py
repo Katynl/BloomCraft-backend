@@ -205,16 +205,17 @@ class RegisterSerializer(serializers.ModelSerializer):
             phone=validated_data.get("phone", ""),
         )
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    username_field = "email"
+class CustomTokenObtainPairSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
-        email = attrs.get("email")
-        password = attrs.get("password")
+        email = attrs.get("email", "").strip()
+        password = attrs.get("password", "")
 
-        user = User.objects.filter(email__iexact=email).first()
-
-        if not user:
+        try:
+            user = User.objects.get(email__iexact=email)
+        except User.DoesNotExist:
             raise serializers.ValidationError({
                 "detail": "Неверный email или пароль"
             })
@@ -222,6 +223,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         if not user.check_password(password):
             raise serializers.ValidationError({
                 "detail": "Неверный email или пароль"
+            })
+
+        if not user.is_active:
+            raise serializers.ValidationError({
+                "detail": "Аккаунт отключён"
             })
 
         refresh = RefreshToken.for_user(user)
@@ -235,7 +241,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
                 "email": user.email,
                 "is_staff": user.is_staff,
                 "is_superuser": user.is_superuser,
-            }
+            },
         }
 
 # Сериализатор для профиля пользователя (чтение и обновление)
